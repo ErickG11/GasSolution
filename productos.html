@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Productos — Gas Solutions</title>
+  <meta name="description" content="Catálogo completo: swivels OPW, pistolas, breakaways, mangueras, dispensadores Wayne y bombas sumergibles Franklin Fuelling Systems." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ── PRODUCT CARDS ─────────────────────────────────────── */
+    .cat-section {
+      padding: 80px 64px;
+      border-bottom: 1px solid var(--border);
+    }
+    .cat-section:nth-child(even) {
+      background: var(--gray-ultra-light);
+    }
+
+    .cat-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 40px;
+      margin-bottom: 56px;
+      flex-wrap: wrap;
+    }
+    .cat-header-left { max-width: 400px; }
+    .cat-header-right {
+      max-width: 480px;
+      font-size: 15px;
+      color: var(--gray);
+      line-height: 1.85;
+      font-weight: 300;
+      padding-top: 8px;
+    }
+
+    .product-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .pcard {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .cat-section:nth-child(even) .pcard {
+      background: var(--white);
+    }
+    .pcard:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(38,72,113,0.1);
+    }
+
+    /* ── IMAGEN DEL PRODUCTO ─────────────────────────────── */
+    .pcard-image {
+      background: var(--blue-ultra-pale);
+      border-bottom: 1px solid var(--border);
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Foto real del producto */
+    .pcard-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      padding: 20px;
+      transition: transform 0.3s ease;
+    }
+    .pcard:hover .pcard-image img {
+      transform: scale(1.04);
+    }
+
+    /* Placeholder cuando no hay imagen todavía */
+    .pcard-image .img-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      height: 100%;
+      color: var(--gray-light);
+    }
+    .pcard-image .img-placeholder svg {
+      opacity: 0.3;
+    }
+    .pcard-image .img-placeholder span {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .pcard-brand {
+      position: absolute;
+      top: 12px;
+      left: 14px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: white;
+      border: 1px solid var(--blue-pale);
+      padding: 3px 8px;
+      border-radius: 2px;
+      z-index: 1;
+    }
+
+    .pcard-body {
+      padding: 24px 24px 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pcard-name {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--black);
+      margin-bottom: 10px;
+      line-height: 1.25;
+    }
+
+    .pcard-desc {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.75;
+      font-weight: 300;
+      margin-bottom: 18px;
+    }
+
+    .pcard-specs {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .pcard-specs li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+
+    .pcard-specs li::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      min-width: 6px;
+      background: var(--blue);
+      border-radius: 50%;
+      margin-top: 5px;
+      opacity: 0.5;
+    }
+
+    .pcard-tag {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: var(--blue-pale);
+      padding: 4px 10px;
+      border-radius: 2px;
+      align-self: flex-start;
+    }
+
+    @media (max-width: 1024px) {
+      .cat-section { padding: 60px 32px; }
+      .cat-header { flex-direction: column; gap: 20px; }
+      .cat-header-right { max-width: 100%; }
+    }
+    @media (max-width: 640px) {
+      .product-cards-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVEGACIÓN -->
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">
+      <!-- <img src="images/logo.png" alt="Gas Solutions"> -->
+      <div class="nav-logo-text">
+        <span class="wordmark">Gas Solutions</span>
+        <span class="tagline">Soluciones para Estaciones de Servicios</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="productos.html" class="active">Productos</a></li>
+      <li><a href="servicios.html">Servicios</a></li>
+      <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <p class="section-label anim-fadeup delay-1">Catálogo Completo</p>
+    <h1 class="section-title anim-fadeup delay-2" style="font-size: clamp(40px, 5vw, 68px); max-width: 700px;">
+      Productos de <em>alta especificación</em>
+    </h1>
+    <p class="section-intro anim-fadeup delay-3" style="margin-top: 20px;">
+      Equipos con garantía de fábrica, respaldo técnico local y disponibilidad permanente de repuestos originales para la industria del combustible.
+    </p>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- 1. SWIVELS                                         -->
+  <!-- ══════════════════════════════════════════════════ -->
+  <div class="cat-section" id="swivels">
+    <div class="cat-header">
+      <div class="cat-header-left">
+        <p class="section-label reveal">OPW</p>
+        <h2 class="section-title reveal reveal-delay-1">Swivels de<br><em>Combustible</em></h2>
+      </div>
+      <p class="cat-header-right reveal reveal-delay-2">
+        Las juntas giratorias OPW permiten que la manguera gire libremente en múltiples planos, eliminando el torcimiento y el desgaste prematuro. Fabricadas con materiales certificados para uso con naftas, gasoil, etanol y biodiesel.
+      </p>
+    </div>
+    <div class="product-cards-grid">
+
+      <div class="pcard reveal reveal-delay-1">
+        <div class="pcard-image">
+          <span class="pcard-brand">OPW</span>
+          <img src="images/Swivel OPW 3-4.jpg" alt="Swivel OPW ¾ pulgada">
+        </div>
+        <div class="pcard-body">
+          <h3 class="pcard-name">Swivel OPW ¾"</h3>
+          <p class="pcard-desc">Junta giratoria multipunta para aplicaciones de autoservicio. Permite rotación horizontal y vertical del conjunto manguera-pistola, reduciendo el desgaste.</p>
+          <ul class="pcard-specs">
+            <li>Diámetro: ¾ pulgada (NPT)</li>
+            <li>Rotación: 360° en plano horizontal</li>
+            <li>Materiales: Aluminio + sellos Buna-N</li>
+            <li>Compatible: Nafta, gasoil, etanol hasta E85</li>
+            <li>Presión máx: 50 PSI</li>
+          </ul>
+          <span class="pcard-tag">Disponible en stock</span>
+        </div>
+      </div>
+
+      <div class="pcard reveal reveal-delay-2">
+        <div class="pcard-image">
+          <span class="pcard-brand">OPW</span>
+          <!-- REEMPLAZÁ: <img src="images/swivel-1.jpg" alt="Swivel OPW 1 pulgada"> -->
+        </div>
+        <div class="pcard-body">
+          <h3 class="pcard-name">Swivel OPW 1"</h3>
+          <p class="pcard-desc">Versión de alto caudal para instalaciones de 1 pulgada. Diseñado para soportar mayor volumen de flujo con baja caída de presión.</p>
+          <ul class="pcard-specs">
+            <li>Diámetro: 1 pulgada (NPT)</li>
+            <li>Rotación: 360° multidireccional</li>
+            <li>Materiales: Aluminio anodizado + sellos Buna-N</li>
+            <li>Compatible: Nafta, gasoil, biodiesel B20</li>
+            <li>Presión máx: 50 PSI</li>
+          </ul>
+          <span class="pcard-tag">Disponible en stock</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- 2. BREAKAWAYS                                      -->
+  <!-- ══════════════════════════════════════════════════ -->
+  <div class="cat-section" id="breakaways">
+    <div class="cat-header">
+      <div class="cat-header-left">
+        <p class="section-label reveal">OPW</p>
+        <h2 class="section-title reveal reveal-delay-1">Breakaways de<br><em>Seguridad</em></h2>
+      </div>
+      <p class="cat-header-right reveal reveal-delay-2">
+        Dispositivos de seguridad esenciales que se activan automáticamente ante una tracción accidental, cortando el flujo en ambos extremos y evitando derrames y daños al dispensador.
+      </p>
+    </div>
+    <div class="product-cards-grid">
+
+      <div class="pcard reveal reveal-delay-1">
+        <div class="pcard-image">
+          <span class="pcard-brand">OPW</span>
+          <!-- REEMPLAZÁ: <img src="images/breakaway-34-simple.jpg" alt="Breakaway OPW ¾ uso simple"> -->
+
+        </div>
+        <div class="pcard-body">
+          <h3 class="pcard-name">Breakaway ¾" Uso Simple</h3>
+          <p class="pcard-desc">Se separa por tracción y requiere reemplazo tras activarse. Cierre automático instantáneo en ambos extremos al momento de la separación.</p>
+          <ul class="pcard-specs">
+            <li>Diámetro: ¾ pulgada (NPT)</li>
+            <li>Activación: tracción axial calibrada</li>
+            <li>Cierre automático en ambos lados</li>
+            <li>Requiere reemplazo post-activación</li>
+            <li>Certificación: UL Listed</li>
+          </ul>
+          <span class="pcard-tag">Disponible en stock</span>
+        </div>
+      </div>
+
+      <div class="pcard reveal reveal-delay-2">
+        <div class="pcard-image">
+          <span class="pcard-brand">OPW</span>
+          <!-- REEMPLAZÁ: <img src="images/breakaway-34-reconectable.jpg" alt="Breakaway OPW ¾ reconectable"> -->
+
+        </div>
+        <div class="pcard-body">
+          <h3 class="pcard-name">Breakaway ¾" Reconectable</h3>
+          <p class="pcard-desc">Permite volver a conectar el accesorio tras un evento de tracción sin reemplazar el dispositivo completo. Reduce costos operativos a largo plazo.</p>
+          <ul class="pcard-specs">
+            <li>Diámetro: ¾ pulgada (NPT)</li>
+            <li>Reconectable sin herramientas especiales</li>
+            <li>Cierre automático en ambos lados</li>
+            <li>Materiales: Aluminio + sellos Viton</li>
+            <li>Certificación: UL Listed</li>
+          </ul>
+          <span class="pcard-tag">Disponible en stock</span>
+        </div>
+      </div>
+
+      <div class="pcard reveal reveal-delay-3">
+        <div class="pcard-image">
+          <span class="pcard-brand">OPW</span>
+          <!-- REEMPLAZÁ: <img src="images/breakaway-1-simple.jpg" alt="Breakaway OPW 1 pulgada uso simple"> -->
+
+        </div>
+        <div class="pcard-body">
+          <h3 class="pcard-name">Breakaway 1" Uso Simple</h3>
+          <p class="pcard-desc">Para líneas de alto caudal de 1 pulgada. Cuerpo de aluminio con sellos de Viton. Cierre automático en ambos extremos al activarse.</p>
+          <ul class="pcard-specs">
+            <li>Diámetro: 1 pulgada (NPT)</li>
+            <li>Activación: tracción axial calibrada</li>
+            <li>Cierre automático en ambos lados</li>
+            <li>Requiere reemplazo post-activación</li>
+            <li>Certificación: UL Listed</li>
+          </ul>
+          <span class="pcard-tag">Disponible en stock</span>
+        </div>
+      </div>
+
+      <div class="pcard reveal reveal-delay-4">
+        <div class="pcard-image">
+          <span class="pcard-brand">OPW</span>
+          <!-- REEMPLAZÁ: <img src="images/breakaway-1-reconectable.jpg" alt="Breakaway OPW 1 pulgada reconectable"> -->
+
+        </div>
+        <div class="pcard-body">
+          <h3 class="pcard-name">Breakaway 1" Reconectable</h3>
+          <p class="pcard-desc">Versión reconectable para instalaciones de 1 pulgada. Ideal para estaciones de alto tráfico donde el costo de reposición es determinante.</p>
+          <ul class="pcard-specs">
+            <li>Diámetro: 1 pulgada (NPT)</li>
+            <li>Reconectable sin herramientas especiales</li>
+            <li>Cierre automático en ambos lados</li>
+            <li>Materiales: Aluminio + sellos Viton</li>
+            <li>Certificación: UL Listed</li>
+          </ul>
+          <span class="pcard-tag">Disponible en stock</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- 3. PISTOLAS                                        -->
+  <!-- ══════════════════════════════════════════════════ -->
+  <div class="cat-section" id="pistolas">
+    <div class="cat-header">
+      <div class="cat-header-left">
+        <p class="section-label reveal">OPW</p>
+        <h2 class="section-title reveal reveal-delay-1">Pistolas de<br><em>Despacho</em></h2>
+      </div>
+      <p class="cat-header-right reveal reveal-delay-2">
+        Pistolas con cierre automático certificado UL, palanca de bloqueo ergonómica y materiales antiestáticos homologados para uso con naftas, gasoil y biocombustibles. Disponibles en caudal estándar y alto caudal.
+      </p>
+    </div>
+    <div class="product-cards-grid">
+
+      <div class="pcard reveal reveal-delay-1">
+        <div class="pcard-image">
+          <span class="pcard-brand">OPW</span>
+          <!-- REEMPLAZÁ: <img src="images/pistola-34.jpg" alt="Pistola OPW caudal estándar ¾"> -->
+
+        </div>
+        <div class="pcard-body">
+          <h3 class="pcard-name">Pistola Caudal Estándar ¾"</h3>
+          <p class="pcard-desc">Para autos y vehículos livianos. Cierre automático al llenarse el tanque, leva de retención ergonómica y protección contra salpicaduras.</p>
+          <ul class="pcard-specs">
+            <li>Conexión: ¾ pulgada (NPT hembra)</li>
+            <li>Caudal: hasta 13 GPM (50 L/min)</li>
+            <li>Cierre automático certificado UL</li>
+            <li>Materiales antiestáticos certificados</li>
+            <li>Compatible: nafta, gasoil, E10, E15, B20</li>
+          </ul>
+          <span class="pcard-tag">Disponible en stock</span>
+        </div>
+      </div>
+
+      <div class="pcard reveal reveal-delay-2">
+        <div class="pcard-image">
+          <span class="pcard-brand">OPW</span>
+          <!-- REEMPLAZÁ: <img src="images/pistola-1.jpg" alt="Pistola OPW alto caudal 1 pulgada"> -->
+
+        </div>
+        <div class="pcard-body">
+          <h3 class="pcard-name">Pistola Alto Caudal 1"</h3>
+          <p class="pcard-desc">Para vehículos pesados, camiones y carga rápida. Mayor caudal por minuto con idéntico nivel de seguridad. Boquilla de mayor diámetro interno.</p>
+          <ul class="pcard-specs">
+            <li>Conexión: 1 pulgada (NPT hembra)</li>
+            <li>Caudal: hasta 40 GPM (151 L/min)</li>
+            <li>Cierre automático certificado UL</li>
+            <li>Materiales antiestáticos certificados</li>
+            <li>Compatible: gasoil, nafta, biodiesel B20</li>
+          </ul>
+          <span class="pcard-tag">Disponible en stock</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- 4. MANGUERAS                                       -->
+  <!-- ══════════════════════════════════════════════════ -->
+  <div class="cat-section" id="mangueras">
+    <div class="cat-header">
+      <div class="cat-header-left">
+        <p class="section-label reveal">Fabricación Propia</p>
+        <h2 class="section-title reveal reveal-delay-1">Mangueras<br><em>Acopladas</em></h2>
+      </div>
+      <p class="cat-header-right reveal reveal-delay-2">
+        Fabricadas con alma de acero helicoidal antiestática y cubierta exterior resistente a hidrocarburos y UV. Cada unidad se acopla y testea individualmente con prueba de estanqueidad. Disponibles en longitudes estándar o a pedido.
+      </p>
+    </div>
+    <div class="product-cards-grid">
+
+      <div class="pcard reveal reveal-delay-1">
+        <div class="pcard-image">
+          <span class="pcard-brand">Fabricación Propia</span>
+          <!-- REEMPLAZÁ: <img src="images/manguera-34-fija.jpg" alt="Manguera ¾ acoples fijos"> -->
+
+        </div>
+        <div class="pcard-body">
+          <h3 class="pcard-name">Manguera ¾" Acoples Fijos</h3>
+          <p class="pcard-desc">Manguera acoplada en fábrica con terminaciones fijas en ambos extremos. Alma de acero helicoidal antiestática. Prueba de estanqueidad incluida.</p>
+          <ul class="pcard-specs">
+            <li>Diámetro interno: ¾ pulgada</li>
+            <li>Alma: acero helicoidal antiestático</li>
+            <li>Cubierta: EPDM resistente a UV e hidrocarburos</li>
+            <li>Longitud: estándar 4 m o a pedido</li>
+            <li>Presión de trabajo: 300 PSI</li>
+          </ul>
+          <span class="pcard-tag">A medida</span>
+        </div>
+      </div>
+
+      <div class="pcard reveal reveal-delay-2">
+        <div class="pcard-image">
+          <span class="pcard-brand">Fabricación Propia</span>
+          <!-- REEMPLAZÁ: <img src="images/manguera-34-giratoria.jpg" alt="Manguera ¾ acoples giratorios"> -->
+
+        </div>
+        <div class="pcard-body">
+          <h3 class="pcard-name">Manguera ¾" Acoples Giratorios</h3>
+          <p class="pcard-desc">Con acoples giratorios en ambos extremos. Reduce el torque sobre el swivel y extiende la vida útil del conjunto de despacho.</p>
+          <ul class="pcard-specs">
+            <li>Diámetro interno: ¾ pulgada</li>
+            <li>Alma: acero helicoidal antiestático</li>
+            <li>Acoples giratorios 360° en extremos</li>
+            <li>Longitud: estándar 4 m o a pedido</li>
+            <li>Presión de trabajo: 300 PSI</li>
+          </ul>
+          <span class="pcard-tag">A medida</span>
+        </div>
+      </div>
+
+      <div class="pcard reveal reveal-delay-3">
+        <div class="pcard-image">
+          <span class="pcard-brand">Fabricación Propia</span>
+          <!-- REEMPLAZÁ: <img src="images/manguera-1-fija.jpg" alt="Manguera 1 pulgada acoples fijos"> -->
+
+        </div>
+        <div class="pcard-body">
+          <h3 class="pcard-name">Manguera 1" Acoples Fijos</h3>
+          <p class="pcard-desc">Para líneas de alto caudal. Construcción reforzada para mayor presión y volumen de flujo. Acoples fijos de alta resistencia en ambos extremos.</p>
+          <ul class="pcard-specs">
+            <li>Diámetro interno: 1 pulgada</li>
+            <li>Alma: acero helicoidal antiestático</li>
+            <li>Cubierta: EPDM resistente a UV e hidrocarburos</li>
+            <li>Longitud: estándar 4 m o a pedido</li>
+            <li>Presión de trabajo: 300 PSI</li>
+          </ul>
+          <span class="pcard-tag">A medida</span>
+        </div>
+      </div>
+
+      <div class="pcard reveal reveal-delay-4">
+        <div class="pcard-image">
+          <span class="pcard-brand">Fabricación Propia</span>
+          <!-- REEMPLAZÁ: <img src="images/manguera-1-giratoria.jpg" alt="Manguera 1 pulgada acoples giratorios"> -->
+
+        </div>
+        <div class="pcard-body">
+          <h3 class="pcard-name">Manguera 1" Acoples Giratorios</h3>
+          <p class="pcard-desc">Acoples giratorios en 1 pulgada para instalaciones de alto caudal. Máxima flexibilidad operativa en cargas de vehículos pesados y camiones.</p>
+          <ul class="pcard-specs">
+            <li>Diámetro interno: 1 pulgada</li>
+            <li>Alma: acero helicoidal antiestático</li>
+            <li>Acoples giratorios 360° en extremos</li>
+            <li>Longitud: estándar 4 m o a pedido</li>
+            <li>Presión de trabajo: 300 PSI</li>
+          </ul>
+          <span class="pcard-tag">A medida</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- 5. DISPENSADORES WAYNE                             -->
+  <!-- ══════════════════════════════════════════════════ -->
+  <div class="cat-section" id="dispensadores">
+    <div class="cat-header">
+      <div class="cat-header-left">
+        <p class="section-label reveal">Wayne</p>
+        <h2 class="section-title reveal reveal-delay-1">Dispensadores para<br><em>Estaciones de Servicio</em></h2>
+      </div>
+      <p class="cat-header-right reveal reveal-delay-2">
+        Wayne es uno de los fabricantes de dispensadores más reconocidos del mundo desde 1891. Sus equipos combinan precisión metrológica, pantallas electrónicas y compatibilidad con sistemas de gestión de forecourt. Distribuidores autorizados con soporte técnico local.
+      </p>
+    </div>
+    <div class="product-cards-grid">
+
+      <div class="pcard reveal reveal-delay-1">
+        <div class="pcard-image">
+          <span class="pcard-brand">Wayne</span>
+          <!-- REEMPLAZÁ: <img src="images/dispensador-wayne.jpg" alt="Dispensador Wayne"> -->
+
+        </div>
+        <div class="pcard-body">
+          <h3 class="pcard-name">Dispensadores Wayne</h3>
+          <p class="pcard-desc">Dispensadores de última generación para estaciones de servicio. Precisión metrológica certificada, pantalla electrónica y sistema de pago integrado.</p>
+          <ul class="pcard-specs">
+            <li>Pantalla electrónica de alta visibilidad</li>
+            <li>Precisión de medición: ±0.3%</li>
+            <li>Compatible con sistemas POS y forecourt</li>
+            <li>Múltiples configuraciones de productos</li>
+            <li>Garantía de fábrica incluida</li>
+          </ul>
+          <span class="pcard-tag">Consultar modelos</span>
+        </div>
+      </div>
+
+      <div class="pcard reveal reveal-delay-2">
+        <div class="pcard-image">
+          <span class="pcard-brand">Wayne</span>
+          <!-- REEMPLAZÁ: <img src="images/repuestos-wayne.jpg" alt="Repuestos para dispensadores Wayne"> -->
+
+        </div>
+        <div class="pcard-body">
+          <h3 class="pcard-name">Repuestos para Dispensadores Wayne</h3>
+          <p class="pcard-desc">Stock permanente de repuestos originales para toda la línea Wayne. Garantía de autenticidad y compatibilidad certificada con los equipos instalados.</p>
+          <ul class="pcard-specs">
+            <li>Medidores y contadores Wayne originales</li>
+            <li>Válvulas de control de flujo</li>
+            <li>Tarjetas electrónicas y displays</li>
+            <li>Impresoras y rollos de papel</li>
+            <li>Identificación por número de parte</li>
+          </ul>
+          <span class="pcard-tag">Stock disponible</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- 6. BOMBAS FRANKLIN                                 -->
+  <!-- ══════════════════════════════════════════════════ -->
+  <div class="cat-section" id="bombas">
+    <div class="cat-header">
+      <div class="cat-header-left">
+        <p class="section-label reveal">Franklin Fuelling Systems</p>
+        <h2 class="section-title reveal reveal-delay-1">Bombas<br><em>Sumergibles</em></h2>
+      </div>
+      <p class="cat-header-right reveal reveal-delay-2">
+        Referente mundial en bombas sumergibles para tanques de almacenamiento subterráneo. Eficiencia energética, durabilidad en ambientes de hidrocarburos y facilidad de instalación y mantenimiento preventivo.
+      </p>
+    </div>
+    <div class="product-cards-grid">
+
+      <div class="pcard reveal reveal-delay-1">
+        <div class="pcard-image">
+          <span class="pcard-brand">Franklin Fuelling</span>
+          <!-- REEMPLAZÁ: <img src="images/bomba-franklin.jpg" alt="Bomba sumergible Franklin Fuelling Systems"> -->
+
+        </div>
+        <div class="pcard-body">
+          <h3 class="pcard-name">Bombas Sumergibles Franklin</h3>
+          <p class="pcard-desc">Para tanques de almacenamiento subterráneo en estaciones de servicio. Motor sellado totalmente sumergido, alta eficiencia y múltiples opciones de caudal.</p>
+          <ul class="pcard-specs">
+            <li>Aplicación: tanques UST subterráneos</li>
+            <li>Motor sellado resistente a hidrocarburos</li>
+            <li>Potencias disponibles: 0.75 a 3 HP</li>
+            <li>Compatible: nafta, gasoil, etanol</li>
+            <li>Garantía de fábrica Franklin incluida</li>
+          </ul>
+          <span class="pcard-tag">Consultar modelos</span>
+        </div>
+      </div>
+
+      <div class="pcard reveal reveal-delay-2">
+        <div class="pcard-image">
+          <span class="pcard-brand">Franklin Fuelling</span>
+          <!-- REEMPLAZÁ: <img src="images/repuestos-franklin.jpg" alt="Repuestos para bombas Franklin"> -->
+
+        </div>
+        <div class="pcard-body">
+          <h3 class="pcard-name">Repuestos para Bombas Franklin</h3>
+          <p class="pcard-desc">Repuestos originales Franklin para mantenimiento preventivo y correctivo. Garantía de autenticidad y compatibilidad certificada con todos los modelos.</p>
+          <ul class="pcard-specs">
+            <li>Motores eléctricos sumergibles</li>
+            <li>Sellos mecánicos y empaques</li>
+            <li>Turbinas e impulsores</li>
+            <li>Conectores eléctricos sumergibles</li>
+            <li>Identificación por número de parte</li>
+          </ul>
+          <span class="pcard-tag">Stock disponible</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CONTACTO -->
+  <div class="cta-section" id="contacto">
+    <div>
+      <p class="section-label reveal">Consultas</p>
+      <h2 class="section-title reveal reveal-delay-1">¿Necesita un<br><em>producto específico?</em></h2>
+      <a href="mailto:info@gassolutions.com" class="btn-primary reveal reveal-delay-2" style="margin-top: 12px;">Enviar consulta</a>
+    </div>
+    <div class="contact-details">
+      <div class="contact-item reveal reveal-delay-1">
+        <p class="contact-label">Teléfono / WhatsApp</p>
+        <p class="contact-value"><a href="tel:+1234567890">+XX (XXX) XXX-XXXX</a></p>
+      </div>
+      <div class="contact-item reveal reveal-delay-2">
+        <p class="contact-label">Correo Electrónico</p>
+        <p class="contact-value"><a href="mailto:info@gassolutions.com">info@gassolutions.com</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Gas Solutions</div>
+    <ul class="footer-nav">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="productos.html">Productos</a></li>
+      <li><a href="servicios.html">Servicios</a></li>
+      <li><a href="index.html#contacto">Contacto</a></li>
+    </ul>
+    <p class="footer-copy">&copy; 2025 Gas Solutions. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    });
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
