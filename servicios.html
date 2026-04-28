@@ -5,21 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Servicios — Gas Solutions</title>
   <meta name="description" content="Servicios técnicos especializados: venta de equipos, repuestos originales, asesoría técnica y fabricación de mangueras a medida." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
   <!-- NAVEGACIÓN -->
   <nav id="navbar">
-    <a href="index.html" class="nav-logo">
-      <img src="images/Logo colores.png" alt="Gas Solutions">
-    </a>
-    <ul class="nav-links">
+    <a href="index.html" class="nav-wordmark">Gas Solutions</a>
+    <ul class="nav-links" id="nav-links">
       <li><a href="index.html">Inicio</a></li>
       <li><a href="productos.html">Productos</a></li>
       <li><a href="servicios.html" class="active">Servicios</a></li>
       <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
     </ul>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- PAGE HERO -->
@@ -133,11 +137,11 @@
     <div class="contact-details">
       <div class="contact-item reveal reveal-delay-1">
         <p class="contact-label">Teléfono / WhatsApp</p>
-        <p class="contact-value"><a href="tel:+1234567890">+XX (XXX) XXX-XXXX</a></p>
+        <p class="contact-value"><a href="tel:+1234567890">+593 98 461 0118</a></p>
       </div>
       <div class="contact-item reveal reveal-delay-2">
         <p class="contact-label">Correo Electrónico</p>
-        <p class="contact-value"><a href="mailto:info@gassolutions.com">info@gassolutions.com</a></p>
+        <p class="contact-value"><a href="mailto:info@gassolutions.com">callcenter@gassolpro.com</a></p>
       </div>
       <div class="contact-item reveal reveal-delay-3">
         <p class="contact-label">Disponibilidad</p>
@@ -164,6 +168,25 @@
       navbar.classList.toggle('scrolled', window.scrollY > 20);
     });
 
+    const hamburger = document.getElementById('nav-hamburger');
+    const navLinks  = document.getElementById('nav-links');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('open');
+      });
+    });
+    document.addEventListener('click', e => {
+      if (!navbar.contains(e.target)) {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('open');
+      }
+    });
+
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -173,7 +196,6 @@
         }
       });
     }, { threshold: 0.12 });
-
     reveals.forEach(el => observer.observe(el));
   </script>
 

@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Productos — Gas Solutions</title>
   <meta name="description" content="Catálogo completo: swivels OPW, pistolas, breakaways, mangueras, dispensadores Wayne y bombas sumergibles Franklin Fuelling Systems." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
   <style>
     /* ── PRODUCT CARDS ─────────────────────────────────────── */
@@ -41,20 +44,21 @@
     }
 
     .pcard {
-      background: var(--white);
-      border: 1px solid var(--border);
+      background: var(--bg-card);
+      border: 1px solid var(--border-faint);
       border-radius: 6px;
       overflow: hidden;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s;
       display: flex;
       flex-direction: column;
     }
     .cat-section:nth-child(even) .pcard {
-      background: var(--white);
+      background: var(--bg-card);
     }
     .pcard:hover {
       transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(38,72,113,0.1);
+      box-shadow: 0 12px 48px rgba(0,0,0,0.5);
+      background: var(--bg-hover);
     }
 
     /* ── IMAGEN DEL PRODUCTO ─────────────────────────────── */
@@ -112,9 +116,9 @@
       font-weight: 700;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--blue);
-      background: white;
-      border: 1px solid var(--blue-pale);
+      color: var(--accent-light);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
       padding: 3px 8px;
       border-radius: 2px;
       z-index: 1;
@@ -131,7 +135,7 @@
       font-family: var(--font-display);
       font-size: 20px;
       font-weight: 400;
-      color: var(--black);
+      color: var(--text);
       margin-bottom: 10px;
       line-height: 1.25;
     }
@@ -203,15 +207,16 @@
 
   <!-- NAVEGACIÓN -->
   <nav id="navbar">
-    <a href="index.html" class="nav-logo">
-      <img src="images/Logo colores.png" alt="Gas Solutions">
-    </a>
-    <ul class="nav-links">
+    <a href="index.html" class="nav-wordmark">Gas Solutions</a>
+    <ul class="nav-links" id="nav-links">
       <li><a href="index.html">Inicio</a></li>
       <li><a href="productos.html" class="active">Productos</a></li>
       <li><a href="servicios.html">Servicios</a></li>
       <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
     </ul>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- PAGE HERO -->
@@ -661,11 +666,11 @@
     <div class="contact-details">
       <div class="contact-item reveal reveal-delay-1">
         <p class="contact-label">Teléfono / WhatsApp</p>
-        <p class="contact-value"><a href="tel:+1234567890">+XX (XXX) XXX-XXXX</a></p>
+        <p class="contact-value"><a href="tel:+1234567890">+593 98 461 0118</a></p>
       </div>
       <div class="contact-item reveal reveal-delay-2">
         <p class="contact-label">Correo Electrónico</p>
-        <p class="contact-value"><a href="mailto:info@gassolutions.com">info@gassolutions.com</a></p>
+        <p class="contact-value"><a href="mailto:info@gassolutions.com">callcenter@gassolpro.com</a></p>
       </div>
     </div>
   </div>
@@ -687,6 +692,26 @@
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 20);
     });
+
+    const hamburger = document.getElementById('nav-hamburger');
+    const navLinks  = document.getElementById('nav-links');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('open');
+      });
+    });
+    document.addEventListener('click', e => {
+      if (!navbar.contains(e.target)) {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('open');
+      }
+    });
+
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
